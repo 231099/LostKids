@@ -1,0 +1,80 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="row WhiteBackground">
+    <div class="col-md-4 ">
+            <form id="account" method="post">
+                
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                        &nbsp;
+
+                        <button type="submit" class="btn btn-primary">Log in</button>
+
+                    </div>
+                </div>
+                <div class="form-group row col-8" >
+                    
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password..?</a>
+                    &nbsp;
+                    &nbsp;
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                </div>
+                
+            </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h4 class="text-primary">*Attention*</h4>
+
+            <hr />
+            @{
+
+                <h4 class="text-danger">* Your Account Will be Locked After Five Invalid Login Attempts</h4>
+
+                <hr />
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                    <div>
+                        <p>
+                            @if (Model.ExternalLogins != null)
+                            {
+                                <h6> * You Can Register With Your Facebook Account From the Register Button Below</h6>
+
+                                foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Register using your @provider.DisplayName account">Register </button>
+                                }
+                            }
+
+                        </p>
+                    </div>
+                </form>
+            }
+
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

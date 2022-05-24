@@ -1,0 +1,261 @@
+﻿@model PostViewModel
+@using Lost_Kids_WebApp.Utility
+
+
+
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+}
+
+
+<br />
+<h2 class="text-info">Create Post</h2>
+<br />
+
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+
+    <div class="WhiteBackground border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label hidden asp-for="Post.AuthorId" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    {
+                        ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
+
+                        <input type="hidden" readonly asp-for="Post.AuthorId" value="@applicationUser.Id" class="form-control" />
+
+                    }
+                }
+
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.AuthorName" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    {
+                        ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
+
+                        <input readonly asp-for="Post.AuthorName" value="@applicationUser.Name" class="form-control" />
+
+                    }
+                }
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.AuthorEmail" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    {
+                        ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
+
+                        <input readonly asp-for="Post.AuthorEmail" value="@applicationUser.Email" class="form-control" />
+
+                    }
+                }
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.PhoneNumber" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    {
+                        ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
+
+                        <input readonly asp-for="Post.PhoneNumber" value="@applicationUser.PhoneNumber" class="form-control" />
+
+                    }
+                }
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label hidden asp-for="Post.IsFounded" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="hidden"  asp-for="Post.IsFounded" value="False" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label hidden asp-for="Post.Status" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="hidden" asp-for="Post.Status" value="@SD.PostPending" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.Title" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Post.Title" class="form-control" />
+                <span class="text-danger" asp-validation-for="Post.Title"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.Descripition" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <textarea asp-for="Post.Descripition" class="form-control"></textarea>
+                <span class="text-danger" asp-validation-for="Post.Descripition"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.Image" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="file" accept="image/*" multiple asp-for="Post.Image" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.Address" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Post.Address" class="form-control" />
+                <span class="text-danger" asp-validation-for="Post.Address"></span>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.CategoryId" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select id="ddlCategories" asp-for="Post.CategoryId" asp-items="@(new SelectList(Model.categoriesList,"Id","Name"))" class="form-control">
+                </select>
+                <span class="text-danger" asp-validation-for="Post.CategoryId"></span>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Post.SubCategoryId" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select id="ddlSubCategories" asp-for="Post.SubCategoryId" asp-items="@(new SelectList(string.Empty,"Id","Name"))" class="form-control">
+                </select>
+                <span class="text-danger" asp-validation-for="Post.SubCategoryId"></span>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_CreateAndBackButtonsPartial" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+
+<script>
+
+    function UpdateSubCategoriesList() {
+        var SelectedCategory = document.getElementById("ddlCategories").value;
+        $list = $('#ddlSubCategories');
+        $.ajax({
+
+            url: '/Admin/SubCategories/GetSubCategories/' + SelectedCategory,
+            type: 'GET',
+            dataType: 'text',
+            success: function (data) {
+                results = JSON.parse(data);
+                $list.html('');
+                var items = '';
+                for (i in results) {
+                    items += '<option value="' + results[i].value + '">' + results[i].text + '</option>';
+                }
+                $list.html(items);
+            }
+        }
+        );
+
+
+    }
+
+    $(document).ready(function () {
+
+        UpdateSubCategoriesList();
+
+    });
+
+    $("#ddlCategories").on("change", function () {
+        UpdateSubCategoriesList();
+
+    });
+</script>
+
+
+
+    <script>
+
+
+        tinymce.init(
+            {
+                selector: 'textarea',
+                plugins: 'lists',
+                menubar: 'file edit format ',
+
+            }
+
+
+
+
+
+        );
+
+
+
+    </script>
+
+}

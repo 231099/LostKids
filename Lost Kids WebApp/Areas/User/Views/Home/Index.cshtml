@@ -1,0 +1,182 @@
+﻿@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div class="WhiteBackground container">
+
+   
+
+    <ul id="Post-filter" class="Post-filter-list list-inline text-center">
+
+        <li class="active btn btn-secondary ml-1 mr-1 " data-filter=".AllCategories">Show All</li>
+        
+        @foreach (var category in Model.Categories)
+        {
+            <li class="ml-1 mr-1 text-center" data-filter=".@category.Name.Replace(" ",string.Empty)">@category.Name</li>
+        }
+
+
+    </ul>
+
+
+
+    @foreach (var category in Model.Categories)
+    {
+
+        var Post = Model.Posts.Where(m => m.Category.Name.Equals(category.Name));
+
+        <div class="row">
+
+            @if (Post.Count() > 0)
+            {
+
+            <div class="col-12 @category.Name.Replace(" ",string.Empty) AllCategories">
+
+                <div class="row">
+                    <h3 class="text-success">
+                        @category.Name
+                    </h3>
+                </div>
+
+
+                @foreach (var item in Post)
+                {
+                    <div class="border border-dark rounded col-12" style="margin-top:10px;margin-bottom:10px;padding:10px;background-color:lightgray">
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <img src="@item.Image" width="250" style="border-radius:5px;border:1px solid #bbb9b9" />
+                            </div>
+
+                            <div class="col-md-9 col-sm-12">
+                                <div class="row pr-3">
+                                    <div class="col-8">
+                                        <label class="text-primary" style="font-size:21px;">
+                                            @item.Title
+                                        </label>
+                                    </div>
+
+
+                                    <div class="col-4 text-right" style="color:maroon">
+                                        <h6>
+                                            @item.SubCategory.Name
+                                        </h6>
+                                    </div>
+                                </div>
+
+                                <div class="row col-12 text-justify d-none d-md-block">
+                                    @Html.Raw(@item.Descripition)
+                                </div>
+
+
+
+                                <div class="col-md-3 col-sm-12 offset-md-9 text-right">
+
+                                    <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@item.PostId">
+                                        <i class="fas fa-list-ul"></i> Details
+                                    </a>
+
+                                   
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @if (User.IsInRole(SD.AdminUser))
+                    {
+                        <div class="row form-row">
+                            <div class="col-8">
+
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    {
+                                        ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
+
+                                        <input type="hidden" asp-for="Comments.Name" value="@applicationUser.Name" />
+
+                                    }
+                                }
+                                <input placeholder="Add Comment ...." class="row col-12 text-justify d-none d-md-block" asp-for="Comments.CommentDescription" />
+
+                            </div>
+                            <div>
+
+                                <a class="btn btn-success form-control text-white" asp-action="AddComment">
+                                    Post Your Comment
+                                </a>
+
+                            </div>
+                        </div>
+                    }
+
+                    @if (User.IsInRole(SD.EndUser))
+                    {
+                        <div class="row form-row">
+                            <div class="col-8">
+
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    {
+                                        ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
+
+                                        <input type="hidden" asp-for="Comments.Name" value="@applicationUser.Name" />
+
+                                    }
+                                }
+                                <input placeholder="Add Comment ...." class="row col-12 text-justify d-none d-md-block" asp-for="Comments.CommentDescription" />
+
+                            </div>
+                            <div>
+
+                                <a class="btn btn-success form-control text-white" asp-action="AddComment">
+                                    Post Your Comment
+                                </a>
+
+                            </div>
+                        </div>
+                    }
+
+                }
+
+
+            </div>
+
+            }
+        </div>
+
+
+        <div class="p-4"></div>
+    }
+
+
+
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(
+            function ($) {
+                $("#Post-filter li").click(
+                    function () {
+                        $("#Post-filter li").removeClass("active btn btn-secondary");
+                        $(this).addClass("active btn btn-secondary");
+                        var selectedfilter = $(this).data("filter");
+                         $(".AllCategories").fadeOut();
+                        setTimeout(function () {
+                            $(selectedfilter).slideDown();
+
+                        }, 300);
+                    }
+                )
+            }
+        );
+    </script>
+}

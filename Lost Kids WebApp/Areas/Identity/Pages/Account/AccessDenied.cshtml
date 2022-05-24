@@ -1,0 +1,18 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+<h1 class="text-danger ">@ViewData["Title"]</h1>
+<form>
+    <div class="WhiteBackground">
+
+
+        <p class="text-danger">This Page Is Only Authorized For The Admins</p>
+        <p class="text-danger">You Don't Have The Privileges To Access The Content Of This Page  </p>
+       
+        <button  class="btn btn-primary"  asp-action="Index" asp-area="User" type="submit" >
+            Back
+        </button>
+    </div>
+</form>

@@ -1,0 +1,145 @@
+﻿@model IEnumerable<Post>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*This page is displaying the list of all Posts *@
+
+<h2 class="text-info">Search Post</h2>
+<form method="get">
+    <div class="WhiteBackground border">
+        <div class="row">
+            <div class="col-6">
+            </div>
+            @*<div class="col-6 text-right">
+                <partial name="_CreateButtonPartial" />
+            </div>*@
+        </div>
+        <div class="container border border-secondary mb-5" style="height:60px;">
+            <div class="row container">
+                <div class="col-11">
+                    <div class="row" style="padding-top:10px">
+                        <div class="col-4">
+                            @Html.Editor("SearchName", new { htmlAttributes = new { @class = "form-control", @placeholder = "Name..." } })
+                        </div>
+                        <div class="col-4">
+                            @Html.Editor("SearchEmail", new { htmlAttributes = new { @class = "form-control", @placeholder = "Email..." } })
+                        </div>
+                        <div class="col-4">
+                            @Html.Editor("SearchPhone", new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone..." } })
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="row" style="padding-top:10px;">
+                        <button type="submit" value="Search" class="btn btn-success form-control">
+                            <i class="fas fa-search"> </i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-2">
+            <div class="col-4">
+                <label>
+                    Upload Image To Compare:
+                </label>
+            </div>
+            <div class="row col-3">
+                <input id="ImageId" type="file" class="form-control mb-2" width="48" height="24" />
+                <a id="Compare" class="btn btn-primary text-white form-control" title="Compare" asp-action="CompareImage">
+                    <i class="fa fa-search"></i>
+                </a>
+
+            </div>
+        </div>
+        <div>
+
+            @* Check If there is no posts in the list if there is no posts
+            a message no posts will be displayed else
+            all posts name will be displayed in a table *@
+
+
+            @if (Model.Count() == 0)
+            {
+                @*<p class="text-danger">No Posts Available... </p>*@
+
+            }
+            else
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>
+                            @Html.DisplayNameFor(m => m.AuthorName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Title)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(m => m.CategoryId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.SubCategoryId)
+                        </th>
+
+                        <th>
+
+                        </th>
+                        <th>
+
+
+
+
+                    </tr>
+
+                    @*we need a for loop to check the list of category to display items in it*@
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="font-size:medium;font-weight:500;">
+                                @Html.DisplayFor(m => item.AuthorName)
+                            </td>
+                            <td style="font-size:medium;font-weight:500;">
+                                @Html.DisplayFor(m => item.Title)
+                            </td>
+
+                            <td style="font-size:medium;font-weight:500;">
+                                @Html.DisplayFor(m => item.Category.Name)
+                            </td>
+                            <td style="font-size:medium;font-weight:500;">
+                                @Html.DisplayFor(m => item.SubCategory.Name)
+                            </td>
+
+
+
+                            <td>
+
+                                <img src="@item.Image " width="50" />
+
+                            </td>
+
+
+                            <td>
+                                <a asp-action="Details" class="btn btn-primary text-white" title="Details" asp-route-id="@item.PostId">
+                                    <i class="fas fa-list-ul"> </i>
+                                </a>
+                            </td>
+
+
+                        </tr>
+                    }
+
+                </table>
+            }
+
+
+        </div>
+
+    </div>
+</form>
+

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SubCategory>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*This page is displaying the list of all sub-categories *@
+
+
+<div class="WhiteBackground border">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Sub-Categories List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <partial name="_CreateButtonPartial" />
+        </div>
+    </div>
+
+    <div>
+
+        @* Check If there is no sub-Categories in the list if there is no sub-categories
+            a message no categories will be displayed else
+            all sub-categories name will be displayed in a table *@
+
+
+        @if (Model.Count() == 0)
+        {
+            <p class="text-danger">No Sub-Categories... </p>
+            <p class="text-danger">
+                You Can Add New One From The Button Create New Above..
+            </p>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(m => m.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Category.Name)
+                    </th>
+                    <th>
+
+                    </th>
+
+                </tr>
+
+                @*we need a for loop to check the list of category to display items in it*@
+
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td style="font-size:medium;font-weight:500;">
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td style="font-size:medium;font-weight:500;">
+                    @Html.DisplayFor(m => item.Category.Name)
+                </td>
+
+                @*Three buttons for the Category Details,Edit & Delete*@
+                <td style="width:150px">
+                    <partial name="_OperationsButtonPartial" model="item.Id" />
+                </td>
+            </tr>
+                }
+
+            </table>
+        }
+    </div>
+
+</div>
+

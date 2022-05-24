@@ -1,0 +1,234 @@
+﻿@model PostViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<h2 class="text-info">Edit Post</h2>
+<br />
+
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Post.PostId" />
+    <input type="hidden" asp-for="Post.Image" />
+
+    <div class="WhiteBackground border row">
+
+        <div class="col-8">
+
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group row">
+
+                <div class="col-4">
+                    <label asp-for="Post.AuthorName" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <input readonly asp-for="Post.AuthorName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <div class="col-4">
+                    <label hidden asp-for="Post.AuthorId" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <input type="hidden" asp-for="Post.AuthorId" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <div class="col-4">
+                    <label hidden asp-for="Post.AuthorId" class="col-form-label"></label>
+                </div>
+
+
+                <div class="col-8">
+                    <input type="hidden" asp-for="Post.AuthorId" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Post.AuthorId"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-4">
+                    <label asp-for="Post.AuthorEmail" class="col-form-label"></label>
+                </div>
+
+
+                <div class="col-8">
+                    <input readonly asp-for="Post.AuthorEmail" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Post.AuthorEmail"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-4">
+                    <label asp-for="Post.PhoneNumber" class="col-form-label"></label>
+                </div>
+
+
+                <div class="col-8">
+                    <input readonly asp-for="Post.PhoneNumber" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Post.PhoneNumber"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Post.Status" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <input readonly asp-for="Post.Status" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Post.Status"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Post.Title" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Post.Title" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Post.Title"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Post.Descripition" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Post.Descripition" class="form-control"></textarea>
+                    <span class="text-danger" asp-validation-for="Post.Descripition"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Post.Address" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Post.Address" class="form-control">
+                    <span class="text-danger" asp-validation-for="Post.Address"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Post.Image" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" multiple asp-for="Post.Image" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Post.CategoryId" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <select id="ddlCategories" asp-for="Post.CategoryId" asp-items="@(new SelectList(Model.categoriesList,"Id","Name"))" class="form-control">
+                    </select>
+                    <span class="text-danger" asp-validation-for="Post.CategoryId"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Post.SubCategoryId" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <select id="ddlSubCategories" asp-for="Post.SubCategoryId" asp-items="@(new SelectList(Model.subCategoriesList,"Id","Name"))" class="form-control">
+                    </select>
+                    <span class="text-danger" asp-validation-for="Post.SubCategoryId"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    <partial name="_UpdateAndBackButtonsPartial" />
+                </div>
+            </div>
+        </div>
+
+    <div class="col-3 offset-1">
+
+        <img src="@Model.Post.Image" width="100%" style="border:1 solid #bbb9b9; border-radius:5px" />
+    </div>
+
+    </div>
+
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        function UpdateSubCategoriesList() {
+            var SelectedCategory = document.getElementById("ddlCategories").value;
+            $list = $('#ddlSubCategories');
+            $.ajax({
+
+                url: '/Admin/SubCategories/GetSubCategories/' + SelectedCategory,
+                type: 'GET',
+                dataType: 'text',
+                success: function (data) {
+                    results = JSON.parse(data);
+                    $list.html('');
+                    var items = '';
+                    for (i in results) {
+                        items += '<option value = "' + results[i].value + '">' + results[i].text + '</option>';
+                    }
+
+                    $list.html(items);
+
+                }
+            }
+            );
+
+
+        }
+
+
+
+        $("#ddlCategories").on("change", function () {
+            UpdateSubCategoriesList();
+
+        });
+    </script>
+
+    <script>
+
+
+        tinymce.init(
+            {
+                selector: 'textarea',
+                plugins: 'lists',
+                menubar: 'file edit format ',
+
+            }
+
+
+
+
+
+        );
+
+
+
+    </script>
+
+}

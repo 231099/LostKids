@@ -1,0 +1,26 @@
+﻿@model string
+
+
+<div style="width:100%">
+
+
+    @if (Model == SD.PostPending)
+    {
+        <img src="~/Images/Pending.png" width="100%" />
+    }
+    @if (Model == SD.PostApproved)
+    {
+        <img src="~/Images/Approved.png" width="100%" />
+
+    }
+    @if (Model == SD.PostSubmitted)
+    {
+        <img src="~/Images/Submitted.png" width="100%" />
+    }
+   
+
+</div>
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@

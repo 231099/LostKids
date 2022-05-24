@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Lost_Kids_WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+</head>
+<body class="WebBackground">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+
+
+                <a class="navbar-brand" asp-area="User" asp-controller="Home" asp-action="Index">
+
+                    <label class="text-info" style="cursor:pointer">
+                        Find Me
+                    </label>
+                    <img width="40" height="40" src="~/Images/PicsArt_11-06-04.07.36.png" />
+                </a>
+
+
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+
+
+
+                        @if (User.IsInRole(SD.AdminUser))
+                        {
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <div class="dropdown-menu text-white" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-action="Index" asp-area="Admin" asp-controller="Categories">Category</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-area="Admin" asp-controller="SubCategories">Sub-Category</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-area="Admin" asp-controller="Posts">Posts</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-area="Admin" asp-controller="Users">Users</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-area="Admin" asp-controller="FoundedItems">Founded-Items</a>
+
+                                </div>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(SD.EndUser))
+                        {
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content
+                                </a>
+                                <div class="dropdown-menu text-white" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="User" asp-action="Index" asp-controller="Posts">
+                                        My Posts
+                                    </a>
+
+                                    <a class="dropdown-item" asp-area="User" asp-action="Index" asp-controller="Search">
+                                        Search Posts
+                                    </a>
+
+                                    <a class="dropdown-item text-black" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                                        Account
+                                        <i class="fas fa-user"></i>
+                                    </a>
+
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-white bg-dark">
+        <div class="container">
+            &copy; 2021 LostKids-WebApp <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.tiny.cloud/1/hh9ne85pp3iwxwibp8nvnby28b9s82t5xjj6i31yre1ae18g/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

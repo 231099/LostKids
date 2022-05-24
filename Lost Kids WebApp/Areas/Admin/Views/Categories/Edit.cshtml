@@ -1,0 +1,44 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<br />
+
+@*Edit Category Page*@
+
+<form asp-action="Edit" method="post">
+    <h2 class="text-info">Edit Category </h2>
+
+    <div class="WhiteBackground border">
+
+        <div class="form-group row">
+            <div class="col-2">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @Html.HiddenFor(m => m.Id)
+
+                <label asp-for="Name" class="col-form-label"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Name" class="form-control" />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_UpdateAndBackButtonsPartial" />
+            </div>
+
+        </div>
+
+    </div>
+</form>
+
+
+@*when clicking on create when the field is empty it prevent the tab from refreshing*@
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

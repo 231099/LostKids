@@ -1,0 +1,117 @@
+﻿@model PostViewModel
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<h2 class="text-info"> Post's Details</h2>
+<br />
+
+
+<input type="hidden" asp-for="Post.PostId" />
+<input type="hidden" asp-for="Post.Image" />
+
+<div class="WhiteBackground border row">
+
+    <div class="col-8">
+
+
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group row">
+
+            <div class="col-4">
+                <label asp-for="Post.AuthorName" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Post.AuthorName" class="form-control" readonly />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Post.PhoneNumber" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Post.PhoneNumber" class="form-control" readonly />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Post.Title" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Post.Title" class="form-control" readonly />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Post.Descripition" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <textarea asp-for="Post.Descripition" class="form-control" readonly></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Post.Address" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Post.Address" class="form-control" readonly>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Post.CategoryId" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <select id="ddlCategories" disabled asp-for="Post.CategoryId" asp-items="@(new SelectList(Model.categoriesList,"Id","Name"))" class="form-control">
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Post.SubCategoryId" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <select id="ddlSubCategories" disabled asp-for="Post.SubCategoryId" asp-items="@(new SelectList(Model.subCategoriesList,"Id","Name"))" class="form-control">
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-8 offset-4">
+                <a asp-action="Index" class="btn btn-danger form-control">Back</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3 offset-1">
+
+        <img src="@Model.Post.Image" width="100%" style="border:1 solid #bbb9b9; border-radius:5px" />
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+
+
+}
