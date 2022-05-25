@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Lost_Kids_WebApp.Models.Comments;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -48,6 +49,6 @@ namespace Lost_Kids_WebApp.Models
 
         public bool IsFounded { get; set; }
 
-        public List<Comment> Comments{ get; set; }
+        public List<MainComment> MainComments{ get; set; }
     }
 }

@@ -27,35 +27,42 @@ using Lost_Kids_WebApp.Models;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
+#line 4 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
+using Lost_Kids_WebApp.Models.Comments;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
 using Lost_Kids_WebApp.Models.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
+#line 6 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
 using Lost_Kids_WebApp.Utility;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
+#line 8 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Identity;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
+#line 11 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
 using System.Security.Claims;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"be7673bf9e09dfabbeb6d5eddd4fef51abbafb23", @"/Areas/User/Views/Search/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"348c2526a79908566767ec3c1ad68ef53c41e8c6", @"/Areas/User/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b80c0e19ba93b6d5d9c978f338260b8fd142682e", @"/Areas/User/Views/_ViewImports.cshtml")]
     public class Areas_User_Views_Search_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Post>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("id", new global::Microsoft.AspNetCore.Html.HtmlString("Compare"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -103,7 +110,7 @@ using System.Security.Claims;
 #nullable disable
             WriteLiteral("\r\n");
             WriteLiteral("\r\n<h2 class=\"text-info\">Search Post</h2>\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be7673bf9e09dfabbeb6d5eddd4fef51abbafb237361", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be7673bf9e09dfabbeb6d5eddd4fef51abbafb237581", async() => {
                 WriteLiteral("\r\n    <div class=\"WhiteBackground border\">\r\n        <div class=\"row\">\r\n            <div class=\"col-6\">\r\n            </div>\r\n");
                 WriteLiteral(@"        </div>
         <div class=""container border border-secondary mb-5"" style=""height:60px;"">
@@ -158,7 +165,7 @@ using System.Security.Claims;
             <div class=""row col-3"">
                 <input id=""ImageId"" type=""file"" class=""form-control mb-2"" width=""48"" height=""24"" />
                 ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be7673bf9e09dfabbeb6d5eddd4fef51abbafb2310282", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be7673bf9e09dfabbeb6d5eddd4fef51abbafb2310502", async() => {
                     WriteLiteral("\r\n                    <i class=\"fa fa-search\"></i>\r\n                ");
                 }
                 );
@@ -284,7 +291,7 @@ WriteAttributeValue("", 4517, item.Image, 4517, 11, false);
                 WriteAttributeValue(" ", 4528, "", 4529, 1, true);
                 EndWriteAttribute();
                 WriteLiteral(" width=\"50\" />\r\n\r\n                            </td>\r\n\r\n\r\n                            <td>\r\n                                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be7673bf9e09dfabbeb6d5eddd4fef51abbafb2317145", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be7673bf9e09dfabbeb6d5eddd4fef51abbafb2317365", async() => {
                     WriteLiteral("\r\n                                    <i class=\"fas fa-list-ul\"> </i>\r\n                                ");
                 }
                 );

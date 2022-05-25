@@ -28,13 +28,34 @@ using Lost_Kids_WebApp.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Views\_ViewImports.cshtml"
+using Lost_Kids_WebApp.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Views\_ViewImports.cshtml"
+using Lost_Kids_WebApp.Models.Comments;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Views\_ViewImports.cshtml"
 using Lost_Kids_WebApp.Utility;
 
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 7 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e00cc6491323c3a8e74911894a7bbf62c0c9e046", @"/Views/Shared/_OperationsButtonPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"523a7f4cf5303a4fa465c5f4c0c85e7158777c56", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dc5162fb7be94022b88d2b1f9bd13881bddb4964", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__OperationsButtonPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<int>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Details", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -71,7 +92,7 @@ using Lost_Kids_WebApp.Utility;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<div class=\"btn-group\" role=\"group\">\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e00cc6491323c3a8e74911894a7bbf62c0c9e0466475", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e00cc6491323c3a8e74911894a7bbf62c0c9e0467098", async() => {
                 WriteLiteral("\r\n        <i class=\"fas fa-list-ul\"></i>\r\n    ");
             }
             );
@@ -104,7 +125,7 @@ using Lost_Kids_WebApp.Utility;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e00cc6491323c3a8e74911894a7bbf62c0c9e0468905", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e00cc6491323c3a8e74911894a7bbf62c0c9e0469528", async() => {
                 WriteLiteral("\r\n        <i class=\"far fa-edit\"></i>\r\n    ");
             }
             );
@@ -137,7 +158,7 @@ using Lost_Kids_WebApp.Utility;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e00cc6491323c3a8e74911894a7bbf62c0c9e04611326", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e00cc6491323c3a8e74911894a7bbf62c0c9e04611949", async() => {
                 WriteLiteral("\r\n        <i class=\"fas fa-trash-alt\"></i>\r\n    ");
             }
             );
@@ -172,6 +193,10 @@ using Lost_Kids_WebApp.Utility;
             WriteLiteral("\r\n\r\n</div>");
         }
         #pragma warning restore 1998
+        [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
+        public UserManager<ApplicationUser> UserManager { get; private set; }
+        [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
+        public SignInManager<ApplicationUser> SignInManager { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]

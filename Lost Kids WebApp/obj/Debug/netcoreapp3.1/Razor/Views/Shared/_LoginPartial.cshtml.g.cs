@@ -28,6 +28,20 @@ using Lost_Kids_WebApp.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Views\_ViewImports.cshtml"
+using Lost_Kids_WebApp.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Views\_ViewImports.cshtml"
+using Lost_Kids_WebApp.Models.Comments;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Views\_ViewImports.cshtml"
 using Lost_Kids_WebApp.Utility;
 
 #line default
@@ -41,7 +55,7 @@ using Microsoft.AspNetCore.Identity;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"15420000438a939b95334ebd8c7389e5bb08b673", @"/Views/Shared/_LoginPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"523a7f4cf5303a4fa465c5f4c0c85e7158777c56", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dc5162fb7be94022b88d2b1f9bd13881bddb4964", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__LoginPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString(" nav-link text-white"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -119,7 +133,7 @@ WriteAttributeValue("", 418, Convert.ToBase64String(UserManager.GetUserAsync(Use
 #line hidden
 #nullable disable
             WriteLiteral("            <li class=\"nav-item\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15420000438a939b95334ebd8c7389e5bb08b6738281", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15420000438a939b95334ebd8c7389e5bb08b6738699", async() => {
                 WriteLiteral("\r\n");
 #nullable restore
 #line 22 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Views\Shared\_LoginPartial.cshtml"
@@ -155,7 +169,7 @@ WriteAttributeValue("", 418, Convert.ToBase64String(UserManager.GetUserAsync(Use
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                &nbsp;\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15420000438a939b95334ebd8c7389e5bb08b67310508", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15420000438a939b95334ebd8c7389e5bb08b67310926", async() => {
                 WriteLiteral("\r\n                    <button type=\"submit\" class=\"nav-link btn btn-link text-white\"> Logout   <i class=\"fas fa-door-open\"></i></button>\r\n                ");
             }
             );
@@ -201,7 +215,7 @@ WriteAttributeValue("", 418, Convert.ToBase64String(UserManager.GetUserAsync(Use
 #line hidden
 #nullable disable
             WriteLiteral("            <li class=\"nav-item\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15420000438a939b95334ebd8c7389e5bb08b67313838", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15420000438a939b95334ebd8c7389e5bb08b67314256", async() => {
                 WriteLiteral("Register");
             }
             );
@@ -220,7 +234,7 @@ WriteAttributeValue("", 418, Convert.ToBase64String(UserManager.GetUserAsync(Use
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15420000438a939b95334ebd8c7389e5bb08b67315353", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15420000438a939b95334ebd8c7389e5bb08b67315771", async() => {
                 WriteLiteral("Login");
             }
             );

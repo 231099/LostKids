@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lost_Kids_WebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220523202251_AddPostToDB")]
+    [Migration("20220525172223_AddPostToDB")]
     partial class AddPostToDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,31 +37,50 @@ namespace Lost_Kids_WebApp.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Lost_Kids_WebApp.Models.Comment", b =>
+            modelBuilder.Entity("Lost_Kids_WebApp.Models.Comments.MainComment", b =>
                 {
-                    b.Property<int>("CommentID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CommentDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationTime")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("postid")
+                    b.Property<int?>("PostId")
                         .HasColumnType("int");
 
-                    b.HasKey("CommentID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("postid");
+                    b.HasIndex("PostId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("MainComments");
+                });
+
+            modelBuilder.Entity("Lost_Kids_WebApp.Models.Comments.SubComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MainCommentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MainCommentId");
+
+                    b.ToTable("SubComments");
                 });
 
             modelBuilder.Entity("Lost_Kids_WebApp.Models.Post", b =>
@@ -366,11 +385,18 @@ namespace Lost_Kids_WebApp.Data.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Lost_Kids_WebApp.Models.Comment", b =>
+            modelBuilder.Entity("Lost_Kids_WebApp.Models.Comments.MainComment", b =>
                 {
-                    b.HasOne("Lost_Kids_WebApp.Models.Post", "Post")
-                        .WithMany("Comments")
-                        .HasForeignKey("postid")
+                    b.HasOne("Lost_Kids_WebApp.Models.Post", null)
+                        .WithMany("MainComments")
+                        .HasForeignKey("PostId");
+                });
+
+            modelBuilder.Entity("Lost_Kids_WebApp.Models.Comments.SubComment", b =>
+                {
+                    b.HasOne("Lost_Kids_WebApp.Models.Comments.MainComment", null)
+                        .WithMany("SubComments")
+                        .HasForeignKey("MainCommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

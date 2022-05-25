@@ -1,5 +1,8 @@
 ﻿@model IndexViewModel
 
+@using Lost_Kids_WebApp.Models.ViewModels
+
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,12 +12,12 @@
 
 <div class="WhiteBackground container">
 
-   
+
 
     <ul id="Post-filter" class="Post-filter-list list-inline text-center">
 
         <li class="active btn btn-secondary ml-1 mr-1 " data-filter=".AllCategories">Show All</li>
-        
+
         @foreach (var category in Model.Categories)
         {
             <li class="ml-1 mr-1 text-center" data-filter=".@category.Name.Replace(" ",string.Empty)">@category.Name</li>
@@ -74,14 +77,13 @@
                                 </div>
 
 
-
                                 <div class="col-md-3 col-sm-12 offset-md-9 text-right">
 
                                     <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@item.PostId">
                                         <i class="fas fa-list-ul"></i> Details
                                     </a>
 
-                                   
+
                                 </div>
 
 
@@ -89,59 +91,52 @@
                         </div>
 
                     </div>
+
                     @if (User.IsInRole(SD.AdminUser))
                     {
-                        <div class="row form-row">
-                            <div class="col-8">
 
-                                @if (SignInManager.IsSignedIn(User))
-                                {
-                                    {
-                                        ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
-
-                                        <input type="hidden" asp-for="Comments.Name" value="@applicationUser.Name" />
-
-                                    }
-                                }
-                                <input placeholder="Add Comment ...." class="row col-12 text-justify d-none d-md-block" asp-for="Comments.CommentDescription" />
-
-                            </div>
-                            <div>
-
-                                <a class="btn btn-success form-control text-white" asp-action="AddComment">
-                                    Post Your Comment
-                                </a>
-
-                            </div>
+                        <div>
+                            @{
+                                await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = 0 });
+                            }
                         </div>
+
+                        
+
+
                     }
 
                     @if (User.IsInRole(SD.EndUser))
                     {
-                        <div class="row form-row">
-                            <div class="col-8">
 
-                                @if (SignInManager.IsSignedIn(User))
-                                {
-                                    {
-                                        ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
-
-                                        <input type="hidden" asp-for="Comments.Name" value="@applicationUser.Name" />
-
-                                    }
-                                }
-                                <input placeholder="Add Comment ...." class="row col-12 text-justify d-none d-md-block" asp-for="Comments.CommentDescription" />
-
-                            </div>
-                            <div>
-
-                                <a class="btn btn-success form-control text-white" asp-action="AddComment">
-                                    Post Your Comment
-                                </a>
-
-                            </div>
+                        <div class="col-md-3 ">
+                            @{
+                                await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = 0 });
+                            }
                         </div>
+
+                        
+
+                        @*@foreach (var c in item.MainComments)
+                        {
+                            <p>@c.Message -- @c.Created</p>
+
+                            <div>
+                                <h4>SubComments</h4>
+                                @{
+                                    await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = c.Id });
+                                }
+                                @foreach (var sc in c.SubComments)
+                                {
+                                    <p>@sc.Message -- @sc.Created</p>
+
+                                }
+                            </div>
+
+                        }*@
+
                     }
+
 
                 }
 
@@ -156,7 +151,6 @@
     }
 
 
-
 </div>
 
 
@@ -169,7 +163,7 @@
                         $("#Post-filter li").removeClass("active btn btn-secondary");
                         $(this).addClass("active btn btn-secondary");
                         var selectedfilter = $(this).data("filter");
-                         $(".AllCategories").fadeOut();
+                        $(".AllCategories").fadeOut();
                         setTimeout(function () {
                             $(selectedfilter).slideDown();
 

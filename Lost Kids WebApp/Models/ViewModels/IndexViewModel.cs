@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lost_Kids_WebApp.Models.Comments;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,8 +12,6 @@ namespace Lost_Kids_WebApp.Models.ViewModels
 
         public IEnumerable <Category> Categories { get; set; }
 
-        public Comment Comments { get; set; }
-        public IEnumerable<Comment> comments { get; set; }
 
     }
 }

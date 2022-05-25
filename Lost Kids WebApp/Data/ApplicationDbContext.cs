@@ -1,4 +1,5 @@
 ﻿using Lost_Kids_WebApp.Models;
+using Lost_Kids_WebApp.Models.Comments;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,7 +19,9 @@ namespace Lost_Kids_WebApp.Data
 
         public DbSet <ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Comment> Comments{ get; set; }
+        public DbSet<MainComment> MainComments { get; set; }
+
+        public DbSet<SubComment> SubComments { get; set; }
 
     }
 }

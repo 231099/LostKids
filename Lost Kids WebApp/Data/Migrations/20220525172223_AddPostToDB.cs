@@ -2,7 +2,7 @@
 
 namespace Lost_Kids_WebApp.Data.Migrations
 {
-    public partial class AddCommentToDB : Migration
+    public partial class AddPostToDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

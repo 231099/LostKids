@@ -1,0 +1,28 @@
+﻿@model CommentViewModel
+
+@{ 
+
+}
+
+<div>
+    <form method="post" asp-action="Comment" asp-controller="Home" asp-area="User">
+        <div class="input-group">
+            
+                <input asp-for="Messsage" class="mr-2" style="width:500px;" placeholder="Add Comment..." />
+            
+            <input asp-for="MainCommentId" type="hidden" />
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                {
+                    ApplicationUser applicationUser = await UserManager.GetUserAsync(User);
+
+                    <input type="hidden" asp-for="UserName" value="@applicationUser.Name" />
+
+                }
+            }
+            <input type="hidden" asp-for="PostId" />
+                <button type="submit" class="  btn btn-success">Submit</button>
+        </div>
+    </form>
+</div>

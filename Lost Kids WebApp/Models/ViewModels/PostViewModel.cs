@@ -14,7 +14,7 @@ namespace Lost_Kids_WebApp.Models.ViewModels
 
         public IEnumerable<SubCategory> subCategoriesList{ get; set; }
 
-        public List<Comment> PostComments { get; set; }
+        
 
     }
 }

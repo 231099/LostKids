@@ -526,3 +526,4 @@ C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\bin\Debug\netcoreap
 C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\bin\Debug\netcoreapp3.1\runtimes\tizen-x86\native\libSkiaSharp.so
 C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\libSkiaSharp.dll
 C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\MainComment.cshtml.g.cs

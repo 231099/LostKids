@@ -10,6 +10,8 @@ using Lost_Kids_WebApp.Utility;
 using Lost_Kids_WebApp.Models;
 using System.Text;
 using System.Security.Claims;
+using Lost_Kids_WebApp.Models.Comments;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lost_Kids_WebApp.Areas.User.Controllers
 {
@@ -17,19 +19,21 @@ namespace Lost_Kids_WebApp.Areas.User.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext db;
-        private bool like;
+        private readonly UserManager<ApplicationUser> userManager;
 
         [BindProperty]
         public PostViewModel PostVM { get; set; }
-        public HomeController(ApplicationDbContext db)
+        public HomeController(ApplicationDbContext db,UserManager <ApplicationUser> userManager)
         {
             this.db = db;
+            this.userManager = userManager;
             PostVM = new PostViewModel()
             {
                 Post = new Post(),
                 categoriesList = db.Categories.ToList()
 
             };
+            
         }
         public async Task <IActionResult> Index()
         {
@@ -63,18 +67,53 @@ namespace Lost_Kids_WebApp.Areas.User.Controllers
             return View(PostVM);
         }
 
-public async Task<IActionResult> AddComment(Comment comment)
+       [HttpPost]
+        public async Task <IActionResult> Comment(CommentViewModel vm)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            string UserId = claim.Value;
-            comment.CreationTime = DateTime.Now;
-            comment.Name = UserId;
-            db.Comments.Add(comment);
-            db.SaveChanges();
+            var user = await userManager.GetUserAsync(HttpContext.User);
 
-            return View(PostVM);
+            if (!ModelState.IsValid)
+            {
+                return View(PostVM);
+            }
+
+            var post = db.Posts.Include(m => m.Category)
+                .Include(m => m.SubCategory)
+                .Include(m =>m.MainComments)
+                .ThenInclude(m=>m.SubComments)
+                .SingleOrDefault(m => m.PostId == vm.PostId);
+
+            if (vm.MainCommentId == 0)
+            {
+                post.MainComments = post.MainComments ?? new List<MainComment>();
+
+                post.MainComments.Add(new MainComment
+                {
+                    Message = vm.Messsage,
+                    Created = DateTime.Now,
+                    UserName = user.Name
+                });
+
+                db.Posts.Update(post);
+            }
+
+
+            else
+            {
+                var comment = new SubComment
+                {
+                    MainCommentId = vm.MainCommentId,
+                    Message = vm.Messsage,
+                    Created = DateTime.Now,
+                };
+                await db.SubComments.AddAsync(comment);
+            }
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+
         }
-       
+
     }
 }
