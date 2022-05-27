@@ -12,6 +12,9 @@ namespace Lost_Kids_WebApp.Models.ViewModels
 
         public IEnumerable <Category> Categories { get; set; }
 
+        public List<MainComment> MainComments { get; set; }
+
+        public PagingInfo PagingInfo { get; set; }
 
     }
 }

@@ -48,7 +48,7 @@ using Lost_Kids_WebApp.Areas.Identity;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7ec7ede3140cea2a883239af33a0451218f7eee9", @"/Areas/Admin/Views/SubCategories/Create.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"76080c1dc31ca776dcf360153a0778af677f5d1b", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5a85d266868a405407d434ff05f6c4d042ff3454", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_SubCategories_Create : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<SubCategoryAndCategoryViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("name", "_StatusMessage", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

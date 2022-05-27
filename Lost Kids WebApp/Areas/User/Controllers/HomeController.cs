@@ -35,15 +35,27 @@ namespace Lost_Kids_WebApp.Areas.User.Controllers
             };
             
         }
-        public async Task <IActionResult> Index()
+        private int pageSize = 3;
+
+        public async Task <IActionResult> Index(int pagenumber=1)
         {
             IndexViewModel IndexVM = new IndexViewModel()
             {
                 Categories = await db.Categories.ToListAsync(),
-                Posts = await db.Posts.Include(m => m.Category).Include(m => m.SubCategory)
-                .Where(m=>m.Status == SD.PostApproved && m.IsFounded == false).ToListAsync()
+                Posts = await db.Posts.Include(m => m.Category).Include(m => m.SubCategory).Where(m=>m.Status == SD.PostApproved && m.IsFounded == false).ToListAsync(),
+                MainComments= await db.MainComments.ToListAsync()
 
         };
+            var count = IndexVM.Posts.Count();
+            IndexVM.Posts = IndexVM.Posts.OrderByDescending(o => o.PostId)
+                .Skip((pagenumber - 1) * pageSize).Take(pageSize).ToList();
+            IndexVM.PagingInfo = new PagingInfo()
+            {
+                CurrentPage = pagenumber,
+                RecordsPerPage = pageSize,
+                TotalRecords = count,
+                UrlParam = "/User/Home/Index?pagenumber=:"
+            };
             return View(IndexVM);
         }
          [HttpGet]

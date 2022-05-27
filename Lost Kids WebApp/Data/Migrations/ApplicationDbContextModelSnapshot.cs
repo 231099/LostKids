@@ -48,7 +48,7 @@ namespace Lost_Kids_WebApp.Data.Migrations
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PostId")
+                    b.Property<int>("Postid")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -56,7 +56,7 @@ namespace Lost_Kids_WebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("Postid");
 
                     b.ToTable("MainComments");
                 });
@@ -76,6 +76,9 @@ namespace Lost_Kids_WebApp.Data.Migrations
 
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Postid")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
@@ -393,7 +396,9 @@ namespace Lost_Kids_WebApp.Data.Migrations
                 {
                     b.HasOne("Lost_Kids_WebApp.Models.Post", null)
                         .WithMany("MainComments")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("Postid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Lost_Kids_WebApp.Models.Comments.SubComment", b =>

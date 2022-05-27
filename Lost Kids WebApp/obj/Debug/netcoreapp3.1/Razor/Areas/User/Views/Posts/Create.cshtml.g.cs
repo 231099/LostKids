@@ -27,6 +27,13 @@ using Lost_Kids_WebApp.Models;
 #line hidden
 #nullable disable
 #nullable restore
+#line 3 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
+using Lost_Kids_WebApp.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 4 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
 using Lost_Kids_WebApp.Models.Comments;
 
@@ -34,21 +41,14 @@ using Lost_Kids_WebApp.Models.Comments;
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
-using Lost_Kids_WebApp.Models.ViewModels;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 8 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
+#line 7 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Identity;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
+#line 10 "C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\Areas\User\Views\_ViewImports.cshtml"
 using System.Security.Claims;
 
 #line default
@@ -62,7 +62,7 @@ using Lost_Kids_WebApp.Utility;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f4c21c67607da53bf3aa2afd3d0df904880153e2", @"/Areas/User/Views/Posts/Create.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b80c0e19ba93b6d5d9c978f338260b8fd142682e", @"/Areas/User/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"393932f897ed0bbc42951c25da167109cdff52a7", @"/Areas/User/Views/_ViewImports.cshtml")]
     public class Areas_User_Views_Posts_Create : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PostViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("text-danger"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

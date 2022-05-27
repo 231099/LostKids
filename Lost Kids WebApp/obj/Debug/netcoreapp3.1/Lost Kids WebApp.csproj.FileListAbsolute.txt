@@ -527,3 +527,14 @@ C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\bin\Debug\netcoreap
 C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\libSkiaSharp.dll
 C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\libSkiaSharp.dll
 C:\Users\user\source\repos\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\MainComment.cshtml.g.cs
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.csproj.AssemblyReference.cache
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.GeneratedMSBuildEditorConfig.editorconfig
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.AssemblyInfoInputs.cache
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.AssemblyInfo.cs
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.csproj.CoreCompileInputs.cache
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.MvcApplicationPartsAssemblyInfo.cs
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.MvcApplicationPartsAssemblyInfo.cache
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.RazorAssemblyInfo.cache
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.RazorAssemblyInfo.cs
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.dll
+F:\Lost Kids WebApp\Lost Kids WebApp\obj\Debug\netcoreapp3.1\Lost Kids WebApp.pdb

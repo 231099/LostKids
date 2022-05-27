@@ -12,5 +12,7 @@ namespace Lost_Kids_WebApp.Models.Comments
 
         public DateTime Created { get; set; }
         public string UserName { get; set; }
+
+        public int Postid { get; set; }
     }
 }

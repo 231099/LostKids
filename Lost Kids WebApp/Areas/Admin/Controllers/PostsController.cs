@@ -29,14 +29,32 @@ namespace Lost_Kids_WebApp.Areas.Admin.Controllers
 
             };
         }
+
+        private int pageSize = 3;
+
+
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pagenumber =1 )
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             string UserId = claim.Value;
-            var Posts = await db.Posts.Include(m => m.Category).Include(m => m.SubCategory).Where(m => m.IsFounded == false).ToListAsync();
-            return View(Posts);
+            AdminPostsPagingViewModel adminPostsPagingVM = new AdminPostsPagingViewModel()
+            {
+                Posts = await db.Posts.Include(m => m.Category).Include(m => m.SubCategory).Where(m => m.IsFounded == false).ToListAsync()
+        };
+            var count = adminPostsPagingVM.Posts.Count;
+            adminPostsPagingVM.Posts = adminPostsPagingVM.Posts.OrderByDescending(o => o.PostId)
+                .Skip((pagenumber - 1) * pageSize).Take(pageSize).ToList();
+            adminPostsPagingVM.PagingInfo = new PagingInfo()
+            {
+                CurrentPage = pagenumber,
+                RecordsPerPage = pageSize,
+                TotalRecords = count,
+                UrlParam = "/Admin/Posts/Index?pagenumber=:"
+            };
+
+            return View(adminPostsPagingVM);
         }
 
         [HttpGet]

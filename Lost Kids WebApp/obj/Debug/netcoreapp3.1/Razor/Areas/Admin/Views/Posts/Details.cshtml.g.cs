@@ -55,7 +55,7 @@ using Microsoft.AspNetCore.Identity;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d55c81caa19e30034fa99ac57abeb3262e2952b0", @"/Areas/Admin/Views/Posts/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"76080c1dc31ca776dcf360153a0778af677f5d1b", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5a85d266868a405407d434ff05f6c4d042ff3454", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Posts_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PostViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("type", "hidden", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

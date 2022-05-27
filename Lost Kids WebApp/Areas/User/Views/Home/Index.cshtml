@@ -1,6 +1,5 @@
 ﻿@model IndexViewModel
 
-@using Lost_Kids_WebApp.Models.ViewModels
 
 
 @{
@@ -38,110 +37,128 @@
             @if (Post.Count() > 0)
             {
 
-            <div class="col-12 @category.Name.Replace(" ",string.Empty) AllCategories">
+                <div class="col-12 @category.Name.Replace(" ",string.Empty) AllCategories">
 
-                <div class="row">
-                    <h3 class="text-success">
-                        @category.Name
-                    </h3>
-                </div>
-
-
-                @foreach (var item in Post)
-                {
-                    <div class="border border-dark rounded col-12" style="margin-top:10px;margin-bottom:10px;padding:10px;background-color:lightgray">
-
-                        <div class="row">
-                            <div class="col-md-3 col-sm-12">
-                                <img src="@item.Image" width="250" style="border-radius:5px;border:1px solid #bbb9b9" />
-                            </div>
-
-                            <div class="col-md-9 col-sm-12">
-                                <div class="row pr-3">
-                                    <div class="col-8">
-                                        <label class="text-primary" style="font-size:21px;">
-                                            @item.Title
-                                        </label>
-                                    </div>
-
-
-                                    <div class="col-4 text-right" style="color:maroon">
-                                        <h6>
-                                            @item.SubCategory.Name
-                                        </h6>
-                                    </div>
-                                </div>
-
-                                <div class="row col-12 text-justify d-none d-md-block">
-                                    @Html.Raw(@item.Descripition)
-                                </div>
-
-
-                                <div class="col-md-3 col-sm-12 offset-md-9 text-right">
-
-                                    <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@item.PostId">
-                                        <i class="fas fa-list-ul"></i> Details
-                                    </a>
-
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
+                    <div class="row">
+                        <h3 class="text-success">
+                            @category.Name
+                        </h3>
                     </div>
 
-                    @if (User.IsInRole(SD.AdminUser))
-                    {
 
-                        <div>
-                            @{
-                                await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = 0 });
-                            }
+                    @foreach (var item in Post)
+                    {
+                        <div class="border border-dark rounded col-12" style="margin-top:10px;margin-bottom:10px;padding:10px;background-color:lightgray">
+
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <img src="@item.Image" width="250" style="border-radius:5px;border:1px solid #bbb9b9" />
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                    <div class="row pr-3">
+                                        <div class="col-8">
+                                            <label class="text-primary" style="font-size:21px;">
+                                                @item.Title
+                                            </label>
+                                        </div>
+
+
+                                        <div class="col-4 text-right" style="color:maroon">
+                                            <h6>
+                                                @item.SubCategory.Name
+                                            </h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="row col-12 text-justify d-none d-md-block">
+                                        @Html.Raw(@item.Descripition)
+                                    </div>
+                                    <hr />
+                                    <h5 class="text-primary">Comments</h5>
+
+                                    @foreach (var comment in Model.MainComments)
+                                    {
+                                        @if (comment.Postid == item.PostId)
+                                        {
+                                            <div class="input-group row col-12 text-justify d-none d-md-block">
+                                                <label class="col-form-label" asp-for="@comment.UserName">@comment.UserName: </label>
+
+                                                @Html.Raw(comment.Message)
+
+                                                <p class="text-success">(@comment.Created)</p>
+                                            </div>
+
+                                        }
+
+
+                                    }
+                                    <div class="col-md-3 col-sm-12 offset-md-9 text-right">
+
+                                        <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@item.PostId">
+                                            <i class="fas fa-list-ul"></i> Details
+                                        </a>
+
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
                         </div>
 
-                        
-
-
-                    }
-
-                    @if (User.IsInRole(SD.EndUser))
-                    {
-
-                        <div class="col-md-3 ">
-                            @{
-                                await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = 0 });
-                            }
-                        </div>
-
-                        
-
-                        @*@foreach (var c in item.MainComments)
+                        @if (User.IsInRole(SD.AdminUser))
                         {
-                            <p>@c.Message -- @c.Created</p>
 
                             <div>
-                                <h4>SubComments</h4>
                                 @{
-                                    await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = c.Id });
-                                }
-                                @foreach (var sc in c.SubComments)
-                                {
-                                    <p>@sc.Message -- @sc.Created</p>
-
+                                    await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = 0 });
                                 }
                             </div>
 
-                        }*@
+
+
+
+                        }
+
+                        @if (User.IsInRole(SD.EndUser))
+                        {
+
+                            <div>
+                                @{
+                                    await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = 0 });
+                                }
+                            </div>
+
+
+
+                            @*@foreach (var c in item.MainComments)
+                                {
+                                    <p>@c.Message -- @c.Created</p>
+
+                                    <div>
+                                        <h4>SubComments</h4>
+                                        @{
+                                            await Html.RenderPartialAsync("MainComment", new CommentViewModel { PostId = item.PostId, MainCommentId = c.Id });
+                                        }
+                                        @foreach (var sc in c.SubComments)
+                                        {
+                                            <p>@sc.Message -- @sc.Created</p>
+
+                                        }
+                                    </div>
+
+                                }*@
+
+                        }
+
 
                     }
 
 
-                }
-
-
-            </div>
+                </div>
 
             }
         </div>
@@ -150,7 +167,9 @@
         <div class="p-4"></div>
     }
 
-
+    <div page-model="@Model.PagingInfo" page-classes-enabled="true" page-class="btn border"
+         page-class-normal="btn btn-light" page-class-selected="btn btn-info active" class="btn-group" style="width: 50%; margin-left: 25%; margin-right: 25%;resize:;"></div>
+    <br />
 </div>
 
 

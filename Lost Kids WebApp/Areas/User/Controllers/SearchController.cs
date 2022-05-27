@@ -32,18 +32,36 @@ namespace Lost_Kids_WebApp.Areas.User.Controllers
             };
 
         }
+
+        private int pageSize = 2;
+
+
         [HttpGet]
-        public async Task<IActionResult> Index(string SearchName = null, string SearchPhone = null, string SearchEmail = null,string SearchPhoto= null)
+        public async Task<IActionResult> Index(string SearchName = null, string SearchPhone = null, 
+            string SearchEmail = null,string SearchPhoto= null,int pagenumber=1)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             string UserId = claim.Value;
-            var Posts = await db.Posts.Include(m => m.Category).Include(m => m.SubCategory)
+
+            
+
+            SearchPostPagingViewModel searchPostPagingVM = new SearchPostPagingViewModel()
+            {
+                Posts = await db.Posts.Include(m => m.Category).Include(m => m.SubCategory)
                 .Where(m => m.PhoneNumber.Contains(SearchPhone) || m.AuthorEmail.Contains(SearchEmail)
-                || m.AuthorName.Contains(SearchName)|| m.Image.Contains(SearchPhoto)).ToListAsync();
-
-
-
+                || m.AuthorName.Contains(SearchName) || m.Image.Contains(SearchPhoto)).ToListAsync()
+            };
+            var count = searchPostPagingVM.Posts.Count;
+            searchPostPagingVM.Posts = searchPostPagingVM.Posts.OrderByDescending(o => o.PostId)
+                .Skip((pagenumber - 1) * pageSize).Take(pageSize).ToList();
+            searchPostPagingVM.PagingInfo = new PagingInfo()
+            {
+                CurrentPage = pagenumber,
+                RecordsPerPage = pageSize,
+                TotalRecords = count,
+                UrlParam = "/User/Search/Index?pagenumber=:"
+            };
             StringBuilder param = new StringBuilder();
 
             param.Append("&SearchName =");
@@ -84,7 +102,7 @@ namespace Lost_Kids_WebApp.Areas.User.Controllers
                 SearchPhone = " ";
             }
 
-            return View(Posts);
+            return View(searchPostPagingVM);
         }
         [HttpGet]
         public async Task<IActionResult> Details(int? id)

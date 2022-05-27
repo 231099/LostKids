@@ -1,6 +1,7 @@
 ﻿using Lost_Kids_WebApp.Areas.Identity.Pages.Account.Manage;
 using Lost_Kids_WebApp.Data;
 using Lost_Kids_WebApp.Models;
+using Lost_Kids_WebApp.Models.ViewModels;
 using Lost_Kids_WebApp.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -29,15 +30,31 @@ namespace Lost_Kids_WebApp.Areas.Admin.Controllers
             this._userManager = _userManager;   
         }
 
+        private int pageSize = 4;
 
-        public async Task <IActionResult> Index()
+        public async Task <IActionResult> Index(int pagenumber=1)
         {
             /*this method for dipslaying the list of user to the admin but without
             showing admin user which is already logged in*/
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             string UserId = claim.Value;
-            return View(await db.ApplicationUsers.Where(m=>m.Id !=UserId).ToListAsync());
+            UserPagingViewModel UserPagingVM = new UserPagingViewModel()
+            {
+                ApplicationUsers = await db.ApplicationUsers.Where(m => m.Id != UserId).ToListAsync()
+            };
+            var count = UserPagingVM.ApplicationUsers.Count;
+            UserPagingVM.ApplicationUsers = UserPagingVM.ApplicationUsers.OrderByDescending(o => o.Id)
+                .Skip((pagenumber - 1) * pageSize).Take(pageSize).ToList();
+            UserPagingVM.PagingInfo = new PagingInfo()
+            {
+                CurrentPage = pagenumber,
+                RecordsPerPage = pageSize,
+                TotalRecords = count,
+                UrlParam = "/Admin/Users/Index?pagenumber=:"
+            };
+
+            return View(UserPagingVM);
         }
 
         // this method for locking & Unlocking User's Account 

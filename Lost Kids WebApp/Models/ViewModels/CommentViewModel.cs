@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lost_Kids_WebApp.Models.Comments;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,5 +18,6 @@ namespace Lost_Kids_WebApp.Models.ViewModels
         [Required]
         public string UserName { get; set; }
 
+        public IEnumerable<MainComment> MainComments { get; set; }
     }
 }

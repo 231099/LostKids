@@ -15,6 +15,9 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Lost_Kids_WebApp.Areas.User.Controllers
 {
+    
+
+
     [Area("User")]
     public class PostsController : Controller
     {
@@ -33,15 +36,28 @@ namespace Lost_Kids_WebApp.Areas.User.Controllers
                 categoriesList= db.Categories.ToList(),
             };
         }
-
+        private int pageSize = 2;
         [HttpGet]
-        public async Task <IActionResult> Index()
+        public async Task <IActionResult> Index(int pagenumber=1)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             string UserId = claim.Value;
-            var Posts =await db.Posts.Include(m => m.Category).Include(m => m.SubCategory).Where(m=>m.AuthorId == UserId).ToListAsync();
-            return View(Posts);
+            UserPostsPagingViewModel userPostsPagingVM = new UserPostsPagingViewModel()
+            {
+                Posts = await db.Posts.Include(m => m.Category).Include(m => m.SubCategory).Where(m => m.AuthorId == UserId).ToListAsync()
+            };
+            var count = userPostsPagingVM.Posts.Count;
+            userPostsPagingVM.Posts = userPostsPagingVM.Posts.OrderByDescending(o => o.PostId)
+                .Skip((pagenumber - 1) * pageSize).Take(pageSize).ToList();
+            userPostsPagingVM.PagingInfo = new PagingInfo()
+            {
+                CurrentPage = pagenumber,
+                RecordsPerPage = pageSize,
+                TotalRecords = count,
+                UrlParam = "/User/Posts/Index?pagenumber=:"
+            };
+            return View(userPostsPagingVM);
         }
 
         [HttpGet]
@@ -74,7 +90,13 @@ namespace Lost_Kids_WebApp.Areas.User.Controllers
                     ImagePath = @"\Images\" + ImageName;
 
                 }
-
+                byte[] image;
+                using (var ms = new MemoryStream())
+                {
+                    files[0].CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    image = fileBytes;
+                }
 
                 PostVM.Post.Image = ImagePath;
                 db.Posts.Add(PostVM.Post);
@@ -204,6 +226,9 @@ namespace Lost_Kids_WebApp.Areas.User.Controllers
             Post post =await db.Posts.FindAsync(id);
             return PartialView("_PostStatus", post.Status);
         }
+
+
+
 
     }
 }

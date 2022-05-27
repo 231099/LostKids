@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ApplicationUser>
+﻿@model UserPagingViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,9 +20,9 @@
 
     <div>
 
-        
 
-        @if (Model.Count() == 0)
+
+        @if (Model.ApplicationUsers.Count() == 0)
         {
             <p class="text-danger">No Users... </p>
             <p class="text-danger">
@@ -33,24 +33,24 @@
         {
             <table class="table table-striped border">
                 <tr class="table-secondary">
-                    
+
                     <th>
-                        @Html.DisplayNameFor(m => m.Name)
+                        @Html.DisplayNameFor(m => m.ApplicationUsers[0].Name)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.Email)
+                        @Html.DisplayNameFor(m => m.ApplicationUsers[0].Email)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.PhoneNumber)
+                        @Html.DisplayNameFor(m => m.ApplicationUsers[0].PhoneNumber)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.City)
+                        @Html.DisplayNameFor(m => m.ApplicationUsers[0].City)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.Governorate)
+                        @Html.DisplayNameFor(m => m.ApplicationUsers[0].Governorate)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.PostalCode)
+                        @Html.DisplayNameFor(m => m.ApplicationUsers[0].PostalCode)
 
                     </th>
                     <th>
@@ -60,55 +60,58 @@
 
                 @*we need a for loop to check the list of category to display items in it*@
 
-                @foreach (var item in Model)
+                @foreach (var item in Model.ApplicationUsers)
                 {
-            <tr>
+                    <tr>
 
-                <td style="font-size:medium;font-weight:500;">
-                    @Html.DisplayFor(m => item.Name)
-                </td>
-                <td style="font-size:medium;font-weight:500;">
-                    @Html.DisplayFor(m => item.Email)
-                </td>
-                <td style="font-size:medium;font-weight:500;">
-                    @Html.DisplayFor(m => item.PhoneNumber)
-                </td>
-                <td style="font-size:medium;font-weight:500;">
-                    @Html.DisplayFor(m => item.City)
-                </td>
-                <td style="font-size:medium;font-weight:500;">
-                    @Html.DisplayFor(m => item.Governorate)
-                </td>
-                <td style="font-size:medium;font-weight:500;">
-                    @Html.DisplayFor(m => item.PostalCode)
-                </td>
+                        <td style="font-size:medium;font-weight:500;">
+                            @Html.DisplayFor(m => item.Name)
+                        </td>
+                        <td style="font-size:medium;font-weight:500;">
+                            @Html.DisplayFor(m => item.Email)
+                        </td>
+                        <td style="font-size:medium;font-weight:500;">
+                            @Html.DisplayFor(m => item.PhoneNumber)
+                        </td>
+                        <td style="font-size:medium;font-weight:500;">
+                            @Html.DisplayFor(m => item.City)
+                        </td>
+                        <td style="font-size:medium;font-weight:500;">
+                            @Html.DisplayFor(m => item.Governorate)
+                        </td>
+                        <td style="font-size:medium;font-weight:500;">
+                            @Html.DisplayFor(m => item.PostalCode)
+                        </td>
 
-                <td>
-                    @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
-                    {
-                        <a class="btn btn-success " asp-action="LockUnlock" asp-route-id="@item.Id">
-                            <i class="fas fa-lock-open" title="Lock Account"></i>
-                        </a>
-                    }
-                    else
-                    {
-                        <a class="btn btn-danger " asp-action="LockUnlock" asp-route-id="@item.Id">
-                            <i class="fas fa-lock" title="Unlock Account"></i>
-                        </a>
-                    }
-                    @*<a asp-action="Edit" class="btn btn-primary text-white" title="Edit" asp-route-id="@Model">
-                        <i class="far fa-edit"></i>
-                    </a>*@
-                    @*<a asp-action="Delete" class="btn btn-primary text-white" asp-route-id="@item.Id" >
-                        <i class="fas fa-trash-alt"></i>
-                    </a>*@
+                        <td>
+                            @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
+                            {
+                                <a class="btn btn-success " asp-action="LockUnlock" asp-route-id="@item.Id">
+                                    <i class="fas fa-lock-open" title="Lock Account"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger " asp-action="LockUnlock" asp-route-id="@item.Id">
+                                    <i class="fas fa-lock" title="Unlock Account"></i>
+                                </a>
+                            }
+                            @*<a asp-action="Edit" class="btn btn-primary text-white" title="Edit" asp-route-id="@Model">
+                                <i class="far fa-edit"></i>
+                            </a>*@
+                            @*<a asp-action="Delete" class="btn btn-primary text-white" asp-route-id="@item.Id" >
+                                <i class="fas fa-trash-alt"></i>
+                            </a>*@
 
-                </td>
+                        </td>
 
-            </tr>
+                    </tr>
                 }
 
             </table>
+            <div page-model="@Model.PagingInfo" page-classes-enabled="true" page-class="btn border"
+                 page-class-normal="btn btn-light" page-class-selected="btn btn-info active" class="btn-group float-right"></div>
+            <br />
         }
     </div>
 

@@ -35,11 +35,28 @@ namespace Lost_Kids_WebApp.Areas.Admin.Controllers
 
         // Index method for displaying the list of subcategories and the category it is related to.
 
+        private int pageSize = 5;
+
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pagenumber=1)
         {
-            var subcategories = await db.SubCategories.Include(m => m.Category).ToListAsync();
-            return View(subcategories);
+            SubCategoryPagingViewModel subCategoryPagingVM = new SubCategoryPagingViewModel()
+            {
+                subCategories = await db.SubCategories.Include(m => m.Category).ToListAsync()
+            };
+
+            var count = subCategoryPagingVM.subCategories.Count;
+            subCategoryPagingVM.subCategories = subCategoryPagingVM.subCategories.OrderByDescending(o => o.Id)
+                .Skip((pagenumber - 1) * pageSize).Take(pageSize).ToList();
+            subCategoryPagingVM.PagingInfo = new PagingInfo()
+            {
+                CurrentPage = pagenumber,
+                RecordsPerPage = pageSize,
+                TotalRecords = count,
+                UrlParam = "/Admin/SubCategories/Index?pagenumber=:"
+            };
+            return View(subCategoryPagingVM);
+
         }
 
 
